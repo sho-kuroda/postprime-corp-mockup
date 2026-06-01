@@ -1962,6 +1962,12 @@
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
+        // どの画面幅でも右下隅から一定量だけ覗くよう動的配置
+        const halfH =
+          Math.tan((camera.fov * Math.PI) / 360) * camera.position.z;
+        const halfW = halfH * camera.aspect;
+        const RE = 3.6; // 変位込みの実効半径
+        blob.position.set(halfW + RE * 0.4, -halfH - RE * 0.4, 0);
       }
       new ResizeObserver(resize).observe(hero);
       resize();
@@ -1975,7 +1981,7 @@
         group.rotation.x = my * 0.15;
         camera.position.x += (mx * 0.6 - camera.position.x) * 0.03;
         camera.position.y += (-my * 0.4 - camera.position.y) * 0.03;
-        camera.lookAt(0.6, 0, 0);
+        camera.lookAt(0, 0, 0);
         renderer.render(scene, camera);
         if (!reduce) requestAnimationFrame(animate);
       }
