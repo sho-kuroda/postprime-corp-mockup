@@ -539,6 +539,7 @@
         size: 0.045,
         transparent: true,
         opacity: 0.9,
+        depthWrite: false,
       });
       group.add(new THREE.Points(pGeo, pMat));
       const segs = [];
@@ -554,6 +555,7 @@
         color: 0x2ed368,
         transparent: true,
         opacity: 0.18,
+        depthWrite: false,
       });
       group.add(new THREE.LineSegments(lGeo, lMat));
 
