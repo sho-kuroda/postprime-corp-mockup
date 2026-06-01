@@ -1962,11 +1962,12 @@
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
-        // 右端のすぐ内側＋下方に配置し、左上の一部が見えるように（縦視野は常に一定なのでYは固定的）
+        // 右下に配置。ただし超ワイド/ズーム時に右端へ飛んで消えないよう、Xに上限を設ける
         const halfH =
           Math.tan((camera.fov * Math.PI) / 360) * camera.position.z;
         const halfW = halfH * camera.aspect;
-        blob.position.set(halfW - 0.5, -(halfH + 1.1), 0);
+        const bx = Math.min(halfW - 0.5, 6.0); // 右へ行き過ぎを防止（常に画面内に覗く）
+        blob.position.set(bx, -(halfH + 1.1), 0);
       }
       new ResizeObserver(resize).observe(hero);
       resize();
