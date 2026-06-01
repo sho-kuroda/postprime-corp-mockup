@@ -1720,8 +1720,10 @@
 
     <script>
       // 白抜きロゴ
-      const PPW = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAC+0lEQVR4nO2cy67DIAxEcdT//+W5qytVVR8B/Bgbz6aLxiH1wcZQiAAYrThdgW23GkC8OgKC1QCC1QCC1QCC1QCC1QCC1QCC1QCC1QCC9Ri1hJvXySBRdgBQtnMHkwkAAtowB5IBAMjalpMGYYziYo4ADC6ZpCPWCMDgfCacFAGsUq2gWCPgGHUEBI8NDSB4UGYDgMEn08nYVbnCUBIqAwCx45+FigAwcgmVAEAxP8tIDOEqknJk+AnZAPw7HU49WUYiCA+Sh4RSmzT/dEVGgGdlgw/OTxMFV+GSUkYCaQFAsJPxpTNYggADgOhejzfP8ex0MEdD9ExYQ6/OfqcVCJIFgPdk6Jc+pZ5ZCL+u/5T+XAHcqfGtJF+++zXn0IBAVwVlEBZtxCr6MwPAy+es42bbEtYqKKtk8nqTamp3KUIWe4FJb3JwJipXQZJkCSH91kRx/IFwiILQMnRWd3+wEDyD9T3Ml6PFeHwRgmWQbVlGgMYkTYa+YHjA46gyFEr3CV1G0QTg+UPE2c7sXtoRIEZjAXPup9sbal3BIMD22z1L7Q01XfplVKZBGBu2bGkrHQBUHcwfBzheWHs/ewTAyfmhcK6DnS8b9y0NANXTDjMAODl/tayVygCwaX/XqRSph60Kwobtam8Gw+yeBYCX42dtjnhdDZwG2VmbNFsTvSUbG6xm2hgnAABhL3b9g+Yq7nwstOGqLMdUxbjK+W9jnADA0jFi8F3pMUAbWorlh+iD2toSpWvKA9DaxPuq3aWHMttSrISszq0CoLSuwrlfFmzc1REQLHYAKNJGWgAWaYMqDWUA8Els296pAeyUi1i0nbHD6RGAzbUaqv95WQGI8WsBRNHuuAjYeaHGr6Ou1BAYT0li8szwOwc/24enmWznhIfi266onR+Zgu5CwM1oYHtfXYoxQBaiQYjeN6EiAaieGT++v+t0+tTDCuBZnx5splSlB8EMYFWpQLDNAzS0OhcIEcPeUCvR9vrqEZBKDSBYDSBYDSBYDWDE6g8mGa3eoYo7gQAAAABJRU5ErkJggg==",
-        TTW = "data:image/png;base64,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";
+      const PPW =
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAC+0lEQVR4nO2cy67DIAxEcdT//+W5qytVVR8B/Bgbz6aLxiH1wcZQiAAYrThdgW23GkC8OgKC1QCC1QCC1QCC1QCC1QCC1QCC1QCC1QCC9Ri1hJvXySBRdgBQtnMHkwkAAtowB5IBAMjalpMGYYziYo4ADC6ZpCPWCMDgfCacFAGsUq2gWCPgGHUEBI8NDSB4UGYDgMEn08nYVbnCUBIqAwCx45+FigAwcgmVAEAxP8tIDOEqknJk+AnZAPw7HU49WUYiCA+Sh4RSmzT/dEVGgGdlgw/OTxMFV+GSUkYCaQFAsJPxpTNYggADgOhejzfP8ex0MEdD9ExYQ6/OfqcVCJIFgPdk6Jc+pZ5ZCL+u/5T+XAHcqfGtJF+++zXn0IBAVwVlEBZtxCr6MwPAy+es42bbEtYqKKtk8nqTamp3KUIWe4FJb3JwJipXQZJkCSH91kRx/IFwiILQMnRWd3+wEDyD9T3Ml6PFeHwRgmWQbVlGgMYkTYa+YHjA46gyFEr3CV1G0QTg+UPE2c7sXtoRIEZjAXPup9sbal3BIMD22z1L7Q01XfplVKZBGBu2bGkrHQBUHcwfBzheWHs/ewTAyfmhcK6DnS8b9y0NANXTDjMAODl/tayVygCwaX/XqRSph60Kwobtam8Gw+yeBYCX42dtjnhdDZwG2VmbNFsTvSUbG6xm2hgnAABhL3b9g+Yq7nwstOGqLMdUxbjK+W9jnADA0jFi8F3pMUAbWorlh+iD2toSpWvKA9DaxPuq3aWHMttSrISszq0CoLSuwrlfFmzc1REQLHYAKNJGWgAWaYMqDWUA8Els296pAeyUi1i0nbHD6RGAzbUaqv95WQGI8WsBRNHuuAjYeaHGr6Ou1BAYT0li8szwOwc/24enmWznhIfi266onR+Zgu5CwM1oYHtfXYoxQBaiQYjeN6EiAaieGT++v+t0+tTDCuBZnx5splSlB8EMYFWpQLDNAzS0OhcIEcPeUCvR9vrqEZBKDSBYDSBYDSBYDWDE6g8mGa3eoYo7gQAAAABJRU5ErkJggg==",
+        TTW =
+          "data:image/png;base64,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";
       ["ppico", "ppico2"].forEach((id) => {
         const e = document.getElementById(id);
         if (e) e.src = PPW;
@@ -1781,7 +1783,7 @@
       vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0); m=m*m; return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3))); }`;
       const vert = `uniform float uTime; varying vec3 vN; varying float vD; ${NOISE}
     void main(){ float n=snoise(normal*1.1+vec3(0.0,0.0,uTime*0.20)); float n2=snoise(normal*2.3+vec3(uTime*0.15))*0.5;
-      float disp=(n+n2)*0.55; vec3 pos=position+normal*disp; vD=disp; vN=normalize(normalMatrix*normal);
+      float disp=(n+n2)*0.9; vec3 pos=position+normal*disp; vD=disp; vN=normalize(normalMatrix*normal);
       gl_Position=projectionMatrix*modelViewMatrix*vec4(pos,1.0); }`;
       const frag = `uniform vec3 uA; uniform vec3 uB; uniform vec3 uHi; varying vec3 vN; varying float vD;
     void main(){ vec3 V=vec3(0.0,0.0,1.0); float fres=pow(1.0-max(dot(normalize(vN),V),0.0),2.2);
@@ -1798,8 +1800,8 @@
         vertexShader: vert,
         fragmentShader: frag,
       });
-      const blob = new THREE.Mesh(new THREE.IcosahedronGeometry(1.55, 48), mat);
-      blob.position.set(1.7, 0.1, 0);
+      const blob = new THREE.Mesh(new THREE.IcosahedronGeometry(2.8, 56), mat);
+      blob.position.set(5.1, -3.7, 0); // 右下に大きく配置し、左上の一部だけ覗かせる
       scene.add(blob);
       const group = new THREE.Group();
       scene.add(group);
@@ -1827,6 +1829,7 @@
             size: 0.045,
             transparent: true,
             opacity: 0.9,
+            depthWrite: false,
           }),
         ),
       );
@@ -1845,9 +1848,107 @@
             color: 0x2ed368,
             transparent: true,
             opacity: 0.18,
+            depthWrite: false,
           }),
         ),
       );
+
+      // ---- SNSユーザーアイコン（複数パターンを散らす・線より前／アメーバより後ろ）----
+      function avatarTexture(style) {
+        const s = 128,
+          c = document.createElement("canvas");
+        c.width = c.height = s;
+        const g = c.getContext("2d");
+        const cx = s / 2,
+          cy = s / 2,
+          r = s / 2 - 8;
+        const person = (col) => {
+          g.fillStyle = col;
+          g.beginPath();
+          g.arc(cx, cy - 13, 15, 0, Math.PI * 2);
+          g.fill();
+          g.beginPath();
+          g.arc(cx, cy + 42, 27, Math.PI * 1.1, Math.PI * 1.9);
+          g.fill();
+        };
+        if (style === 1) {
+          g.fillStyle = "#16a64f";
+          g.beginPath();
+          g.arc(cx, cy, r, 0, Math.PI * 2);
+          g.fill();
+          person("#ffffff");
+        } else if (style === 2) {
+          g.fillStyle = "#ffffff";
+          g.beginPath();
+          g.arc(cx, cy, r, 0, Math.PI * 2);
+          g.fill();
+          person("#15a64e");
+        } else if (style === 3) {
+          g.lineCap = "round";
+          g.strokeStyle = "#7af0a6";
+          g.lineWidth = 6;
+          g.beginPath();
+          g.arc(cx, cy, r - 3, 0, Math.PI * 2);
+          g.stroke();
+          g.strokeStyle = "#bdf0d3";
+          g.lineWidth = 6;
+          g.beginPath();
+          g.arc(cx, cy - 11, 12, 0, Math.PI * 2);
+          g.stroke();
+          g.beginPath();
+          g.arc(cx, cy + 38, 22, Math.PI * 1.14, Math.PI * 1.86);
+          g.stroke();
+        } else {
+          g.strokeStyle = "#2ed368";
+          g.lineWidth = 6;
+          g.beginPath();
+          g.arc(cx, cy, r - 3, 0, Math.PI * 2);
+          g.stroke();
+          g.fillStyle = "#a9f7c6";
+          g.beginPath();
+          g.arc(cx, cy, r * 0.42, 0, Math.PI * 2);
+          g.fill();
+        }
+        const t = new THREE.CanvasTexture(c);
+        t.anisotropy = 4;
+        return t;
+      }
+      const deg = new Array(COUNT).fill(0);
+      for (let i = 0; i < COUNT; i++) {
+        for (let j = i + 1; j < COUNT; j++) {
+          if (pts[i].distanceTo(pts[j]) < 1.25) {
+            deg[i]++;
+            deg[j]++;
+          }
+        }
+      }
+      const order = [...pts.keys()].sort((a, b) => deg[b] - deg[a]);
+      const picked = [];
+      const AV = 9;
+      for (const idx of order) {
+        if (picked.length >= AV) break;
+        if (picked.every((p) => pts[p].distanceTo(pts[idx]) > 1.0))
+          picked.push(idx);
+      }
+      const styleSeq = [1, 3, 2, 4, 1, 2, 3, 1, 4];
+      const avTex = {};
+      [1, 2, 3, 4].forEach((n) => (avTex[n] = avatarTexture(n)));
+      picked.forEach((idx, k) => {
+        const st = styleSeq[k % styleSeq.length];
+        const sp = new THREE.Sprite(
+          new THREE.SpriteMaterial({
+            map: avTex[st],
+            transparent: true,
+            depthTest: true,
+            depthWrite: false,
+          }),
+        );
+        const sz = 0.15 + Math.min(deg[idx], 6) * 0.006;
+        sp.position.copy(pts[idx]);
+        sp.scale.set(sz, sz, 1);
+        sp.renderOrder = 5;
+        group.add(sp);
+      });
       let mx = 0,
         my = 0;
       hero.addEventListener("pointermove", (e) => {
