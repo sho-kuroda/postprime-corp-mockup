@@ -675,8 +675,7 @@
         const halfH =
           Math.tan((camera.fov * Math.PI) / 360) * camera.position.z;
         const halfW = halfH * camera.aspect;
-        const RE = 3.6;
-        blob.position.set(halfW + RE * 0.4, -halfH - RE * 0.4, 0);
+        blob.position.set(halfW - 0.5, -(halfH + 1.1), 0);
       }
       const ro = new ResizeObserver(resize);
       ro.observe(hero);
