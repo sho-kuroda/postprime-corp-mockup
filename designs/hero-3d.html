@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PostPrime 3Dヒーロー（WebGL）</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Chakra+Petch:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --green: #2ed368;
+        --green-d: #13b049;
+        --green-l: #7af0a6;
+        --ink: #06141c;
+        --mono: "Space Mono", monospace;
+        --tech: "Chakra Petch", sans-serif;
+        --jp: "Zen Kaku Gothic New", -apple-system, sans-serif;
+      }
+      body {
+        font-family: var(--jp);
+        background: #0a0f14;
+        color: #e7ebf0;
+        -webkit-font-smoothing: antialiased;
+        padding: 30px 26px 80px;
+      }
+      .head {
+        max-width: 1200px;
+        margin: 0 auto 22px;
+      }
+      .head h1 {
+        font-size: 21px;
+        font-weight: 900;
+      }
+      .head p {
+        color: #9aa6b4;
+        font-size: 14px;
+        margin-top: 8px;
+        line-height: 1.7;
+      }
+      .pick {
+        max-width: 1200px;
+        margin: 0 auto;
+        border: 2px solid #232a33;
+        border-radius: 20px;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .pick.sel {
+        border-color: var(--green);
+        box-shadow: 0 0 0 3px rgba(46, 211, 104, 0.35);
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        min-height: 620px;
+        background: radial-gradient(
+          120% 130% at 75% 20%,
+          #0e3a3f 0%,
+          #0a2230 38%,
+          #07141d 72%,
+          #050d14 100%
+        );
+      }
+      /* WebGL canvas */
+      #gl {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        display: block;
+      }
+      .vign {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        background: radial-gradient(
+          80% 90% at 30% 40%,
+          rgba(5, 13, 20, 0.55),
+          transparent 60%
+        );
+      }
+      .grain {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        opacity: 0.05;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      .nav {
+        position: relative;
+        z-index: 6;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 50px;
+        max-width: 1160px;
+        margin: 0 auto;
+      }
+      .wm {
+        font-weight: 900;
+        font-size: 22px;
+        color: #fff;
+        letter-spacing: -0.02em;
+      }
+      .wm .ac {
+        color: var(--green);
+      }
+      .wm small {
+        font-family: var(--tech);
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        color: #8fb8a6;
+        margin-left: 6px;
+      }
+      .nav .menu {
+        display: flex;
+        gap: 24px;
+        margin-left: 34px;
+        font-family: var(--tech);
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: #9fb6aa;
+      }
+      .nav .right {
+        margin-left: auto;
+        display: flex;
+        gap: 14px;
+        align-items: center;
+      }
+      .tse {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border: 1px solid rgba(122, 240, 166, 0.4);
+        border-radius: 8px;
+        padding: 6px 11px;
+        font-family: var(--tech);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: #bdf0d3;
+      }
+      .tse .mk {
+        background: var(--green);
+        color: #04140a;
+        font-size: 10px;
+        padding: 2px 5px;
+        border-radius: 4px;
+      }
+
+      .stage {
+        position: relative;
+        z-index: 5;
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 64px 50px 40px;
+      }
+      .eyebrow {
+        font-family: var(--tech);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        color: var(--green-l);
+      }
+      h2.big {
+        font-weight: 900;
+        letter-spacing: -0.01em;
+        line-height: 1.14;
+        color: #fff;
+        font-size: clamp(38px, 5vw, 60px);
+        margin-top: 20px;
+        text-shadow: 0 2px 30px rgba(0, 0, 0, 0.4);
+      }
+      h2.big .g {
+        color: var(--green);
+      }
+      .en {
+        display: block;
+        font-family: var(--tech);
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 15px;
+        margin-top: 16px;
+      }
+      .sub {
+        color: #a7c0b5;
+        font-size: 15px;
+        line-height: 1.9;
+        font-weight: 500;
+        margin-top: 18px;
+        max-width: 24em;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--green);
+        color: #04140a;
+        font-weight: 700;
+        font-size: 14px;
+        padding: 14px 28px;
+        border-radius: 34px;
+        margin-top: 28px;
+        box-shadow: 0 14px 34px -10px rgba(46, 211, 104, 0.6);
+        transition: transform 0.2s;
+      }
+      .cta:hover {
+        transform: translateY(-2px);
+      }
+
+      .htkr {
+        position: relative;
+        z-index: 6;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(6, 18, 24, 0.5);
+        backdrop-filter: blur(8px);
+        overflow: hidden;
+      }
+      .htkr .row {
+        display: flex;
+        align-items: center;
+      }
+      .htkr .ld {
+        flex: none;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 0 18px;
+        height: 50px;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--green-l);
+      }
+      .htkr .ld .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 0 0 rgba(46, 211, 104, 0.5);
+        animation: pl 1.8s infinite;
+      }
+      @keyframes pl {
+        0% {
+          box-shadow: 0 0 0 0 rgba(46, 211, 104, 0.5);
+        }
+        70% {
+          box-shadow: 0 0 0 7px rgba(46, 211, 104, 0);
+        }
+      }
+      .htkr .mask {
+        flex: 1;
+        overflow: hidden;
+      }
+      .htkr .track {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: #9fb6aa;
+        animation: tkr 34s linear infinite;
+      }
+      .htkr:hover .track {
+        animation-play-state: paused;
+      }
+      .htkr .it {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 22px;
+        height: 50px;
+      }
+      .htkr b {
+        color: #fff;
+      }
+      .htkr .up {
+        color: var(--green-l);
+        font-weight: 700;
+      }
+      .htkr .pr {
+        color: var(--green-l);
+        font-weight: 700;
+      }
+      .htkr .sep {
+        color: #2a3a34;
+      }
+      @keyframes tkr {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      .rv {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: rvin 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+      }
+      .rv.d1 {
+        animation-delay: 0.15s;
+      }
+      .rv.d2 {
+        animation-delay: 0.3s;
+      }
+      .rv.d3 {
+        animation-delay: 0.45s;
+      }
+      .rv.d4 {
+        animation-delay: 0.6s;
+      }
+      @keyframes rvin {
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+        }
+        .rv {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="head">
+      <h1>PostPrime 3Dヒーロー（WebGL / Three.js）</h1>
+      <p>
+        有機的に蠢く緑の3Dフォルム＋ネットワーク（線・ノード）。マウスにわずかに反応します。クリックで選択を。
+      </p>
+    </div>
+
+    <div class="pick" data-choice="Hero3D" onclick="toggleSelect(this)">
+      <div class="hero">
+        <canvas id="gl"></canvas>
+        <div class="vign"></div>
+        <div class="grain"></div>
+
+        <div class="nav">
+          <span class="wm rv"
+            >PostPrime<span class="ac">.</span> <small>INC.</small></span
+          >
+          <span class="menu rv d1"
+            ><span>ABOUT</span><span>SERVICES</span><span>IR</span
+            ><span>NEWS</span><span>CONTACT</span></span
+          >
+          <span class="right rv d1"
+            ><span class="tse"
+              ><span class="mk">TSE</span> GROWTH 198A</span
+            ></span
+          >
+        </div>
+
+        <div class="stage">
+          <span class="eyebrow rv d1">PostPrime, Inc.</span>
+          <h2 class="big rv d2">
+            お金のことを、<br />もっと<span class="g">自由</span>に。
+          </h2>
+          <span class="en rv d3">Grow Your Wealth, Be Free.</span>
+          <p class="sub rv d3">
+            投資SNS・ライブ・AI分析が集まる、お金の情報プラットフォーム。
+          </p>
+          <a class="cta rv d4">サービスを見る ↗</a>
+        </div>
+
+        <div class="htkr rv d4">
+          <div class="row">
+            <span class="ld"><span class="dot"></span>LIVE</span>
+            <span class="mask"
+              ><span class="track">
+                <span class="it">東証グロース <b>198A</b></span
+                ><span class="sep">/</span>
+                <span class="it">終値 <b>¥1,235</b></span
+                ><span class="sep">/</span>
+                <span class="it"><span class="up">前日比 +2.15% ↑</span></span
+                ><span class="sep">/</span>
+                <span class="it">高値 <b>1,250</b> 安値 <b>1,180</b></span
+                ><span class="sep">/</span>
+                <span class="it">売買単位 <b>100株</b></span
+                ><span class="sep">/</span>
+                <span class="it"
+                  ><span class="pr">PR：株価意識高いよ。</span></span
+                ><span class="sep">/</span>
+                <span class="it">2026.05.28 15:30 更新</span
+                ><span class="sep">/</span>
+                <span class="it">東証グロース <b>198A</b></span
+                ><span class="sep">/</span>
+                <span class="it">終値 <b>¥1,235</b></span
+                ><span class="sep">/</span>
+                <span class="it"><span class="up">前日比 +2.15% ↑</span></span
+                ><span class="sep">/</span>
+                <span class="it">高値 <b>1,250</b> 安値 <b>1,180</b></span
+                ><span class="sep">/</span>
+                <span class="it">売買単位 <b>100株</b></span
+                ><span class="sep">/</span>
+                <span class="it"
+                  ><span class="pr">PR：株価意識高いよ。</span></span
+                ><span class="sep">/</span>
+                <span class="it">2026.05.28 15:30 更新</span
+                ><span class="sep">/</span>
+              </span></span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+
+      const canvas = document.getElementById("gl");
+      const hero = canvas.closest(".hero");
+      const reduce = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      const renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+      camera.position.set(0, 0, 6);
+
+      // ---- 有機フォルム（ノイズ変位 icosphere）----
+      const NOISE = `
+    vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
+    vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
+    vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
+    vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
+    float snoise(vec3 v){
+      const vec2 C=vec2(1.0/6.0,1.0/3.0); const vec4 D=vec4(0.0,0.5,1.0,2.0);
+      vec3 i=floor(v+dot(v,C.yyy)); vec3 x0=v-i+dot(i,C.xxx);
+      vec3 g=step(x0.yzx,x0.xyz); vec3 l=1.0-g; vec3 i1=min(g.xyz,l.zxy); vec3 i2=max(g.xyz,l.zxy);
+      vec3 x1=x0-i1+C.xxx; vec3 x2=x0-i2+C.yyy; vec3 x3=x0-D.yyy;
+      i=mod289(i);
+      vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));
+      float n_=0.142857142857; vec3 ns=n_*D.wyz-D.xzx;
+      vec4 j=p-49.0*floor(p*ns.z*ns.z);
+      vec4 x_=floor(j*ns.z); vec4 y_=floor(j-7.0*x_);
+      vec4 x=x_*ns.x+ns.yyyy; vec4 y=y_*ns.x+ns.yyyy; vec4 h=1.0-abs(x)-abs(y);
+      vec4 b0=vec4(x.xy,y.xy); vec4 b1=vec4(x.zw,y.zw);
+      vec4 s0=floor(b0)*2.0+1.0; vec4 s1=floor(b1)*2.0+1.0; vec4 sh=-step(h,vec4(0.0));
+      vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy; vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+      vec3 p0=vec3(a0.xy,h.x); vec3 p1=vec3(a0.zw,h.y); vec3 p2=vec3(a1.xy,h.z); vec3 p3=vec3(a1.zw,h.w);
+      vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+      p0*=norm.x; p1*=norm.y; p2*=norm.z; p3*=norm.w;
+      vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0); m=m*m;
+      return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
+    }`;
+      const vert = `
+    uniform float uTime; varying vec3 vN; varying float vD; ${NOISE}
+    void main(){
+      float n = snoise(normal*1.1 + vec3(0.0,0.0,uTime*0.20));
+      float n2 = snoise(normal*2.3 + vec3(uTime*0.15)) * 0.5;
+      float disp = (n + n2) * 0.9;
+      vec3 pos = position + normal * disp;
+      vD = disp; vN = normalize(normalMatrix * normal);
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.0);
+    }`;
+      const frag = `
+    uniform vec3 uA; uniform vec3 uB; uniform vec3 uHi; varying vec3 vN; varying float vD;
+    void main(){
+      vec3 V = vec3(0.0,0.0,1.0);
+      float fres = pow(1.0 - max(dot(normalize(vN), V), 0.0), 2.2);
+      float t = smoothstep(-0.5, 0.65, vD);
+      vec3 col = mix(uA, uB, t);
+      float light = clamp(dot(normalize(vN), normalize(vec3(0.4,0.6,0.8))), 0.0, 1.0);
+      col *= 0.55 + 0.6*light;
+      col += uHi * fres * 0.9;
+      gl_FragColor = vec4(col, 1.0);
+    }`;
+      const mat = new THREE.ShaderMaterial({
+        uniforms: {
+          uTime: { value: 0 },
+          uA: { value: new THREE.Color("#0a7a3c") },
+          uB: { value: new THREE.Color("#5be88a") },
+          uHi: { value: new THREE.Color("#a9f7c6") },
+        },
+        vertexShader: vert,
+        fragmentShader: frag,
+      });
+      const blob = new THREE.Mesh(new THREE.IcosahedronGeometry(2.8, 56), mat);
+      blob.position.set(5.1, -3.7, 0); // さらに右下へ。左上のごく一部だけ覗かせる
+      scene.add(blob);
+
+      // ---- ネットワーク（点＋線）----
+      const group = new THREE.Group();
+      scene.add(group);
+      const COUNT = 90;
+      const pts = [];
+      // 疑似乱数（決定論的）
+      let seed = 1234.5;
+      const rnd = () => {
+        seed = Math.sin(seed) * 43758.5453;
+        return seed - Math.floor(seed);
+      };
+      for (let i = 0; i < COUNT; i++) {
+        pts.push(
+          new THREE.Vector3(
+            (rnd() * 2 - 1) * 4.6,
+            (rnd() * 2 - 1) * 2.6,
+            (rnd() * 2 - 1) * 1.8,
+          ),
+        );
+      }
+      const pGeo = new THREE.BufferGeometry().setFromPoints(pts);
+      const pMat = new THREE.PointsMaterial({
+        color: 0x8af2ad,
+        size: 0.045,
+        transparent: true,
+        opacity: 0.9,
+      });
+      group.add(new THREE.Points(pGeo, pMat));
+      const segs = [];
+      for (let i = 0; i < COUNT; i++) {
+        for (let j = i + 1; j < COUNT; j++) {
+          if (pts[i].distanceTo(pts[j]) < 1.25) {
+            segs.push(pts[i], pts[j]);
+          }
+        }
+      }
+      const lGeo = new THREE.BufferGeometry().setFromPoints(segs);
+      const lMat = new THREE.LineBasicMaterial({
+        color: 0x2ed368,
+        transparent: true,
+        opacity: 0.18,
+      });
+      group.add(new THREE.LineSegments(lGeo, lMat));
+
+      // マウス追従（わずか）
+      let mx = 0,
+        my = 0;
+      hero.addEventListener("pointermove", (e) => {
+        const r = hero.getBoundingClientRect();
+        mx = (e.clientX - r.left) / r.width - 0.5;
+        my = (e.clientY - r.top) / r.height - 0.5;
+      });
+
+      function resize() {
+        const w = hero.clientWidth,
+          h = hero.clientHeight;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      const ro = new ResizeObserver(resize);
+      ro.observe(hero);
+      resize();
+
+      const clock = new THREE.Clock();
+      function animate() {
+        const t = clock.getElapsedTime();
+        mat.uniforms.uTime.value = t;
+        blob.rotation.y = t * 0.18 + mx * 0.5;
+        blob.rotation.x = Math.sin(t * 0.12) * 0.2 + my * 0.3;
+        group.rotation.y = t * 0.04 + mx * 0.25;
+        group.rotation.x = my * 0.15;
+        camera.position.x += (mx * 0.6 - camera.position.x) * 0.03;
+        camera.position.y += (-my * 0.4 - camera.position.y) * 0.03;
+        camera.lookAt(0.6, 0, 0);
+        renderer.render(scene, camera);
+        if (!reduce) requestAnimationFrame(animate);
+      }
+      animate();
+    </script>
+  </body>
+</html>

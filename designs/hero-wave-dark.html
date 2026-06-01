@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>波B 進化版 ― 文字が波に乗る／右肩上がり</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Chakra+Petch:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --green: #13b049;
+        --green-d: #0a8f3c;
+        --green-l: #2ed368;
+        --green-xl: #8af2ad;
+        --mono: "Space Mono", monospace;
+        --tech: "Chakra Petch", sans-serif;
+        --jp: "Zen Kaku Gothic New", -apple-system, sans-serif;
+      }
+      body {
+        font-family: var(--jp);
+        background: #0b0d10;
+        color: #e7ebf0;
+        -webkit-font-smoothing: antialiased;
+        padding: 30px 26px 80px;
+      }
+      .head {
+        max-width: 1200px;
+        margin: 0 auto 22px;
+      }
+      .head h1 {
+        font-size: 21px;
+        font-weight: 900;
+      }
+      .head p {
+        color: #9aa6b4;
+        font-size: 14px;
+        margin-top: 8px;
+        line-height: 1.7;
+      }
+      .pick {
+        max-width: 1200px;
+        margin: 0 auto;
+        border: 2px solid #232a33;
+        border-radius: 20px;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .pick.sel {
+        border-color: var(--green);
+        box-shadow: 0 0 0 3px rgba(19, 176, 73, 0.35);
+      }
+
+      .hero {
+        position: relative;
+        background: #07100b;
+        overflow: hidden;
+        isolation: isolate;
+        min-height: 620px;
+      }
+      .aurora {
+        position: absolute;
+        inset: -20% -10%;
+        z-index: 0;
+        filter: blur(64px);
+        pointer-events: none;
+      }
+      .aurora i {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.45;
+      }
+      .aurora .g1 {
+        width: 520px;
+        height: 520px;
+        left: 6%;
+        top: -14%;
+        background: radial-gradient(circle, #1fd968, transparent 62%);
+        animation: drift1 17s ease-in-out infinite;
+      }
+      .aurora .g2 {
+        width: 460px;
+        height: 460px;
+        right: 4%;
+        top: 2%;
+        background: radial-gradient(circle, #0a8f3c, transparent 62%);
+        animation: drift2 21s ease-in-out infinite;
+      }
+      @keyframes drift1 {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(50px, -26px) scale(1.1);
+        }
+      }
+      @keyframes drift2 {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(-44px, 34px) scale(1.06);
+        }
+      }
+      .grain {
+        position: absolute;
+        inset: 0;
+        z-index: 6;
+        pointer-events: none;
+        opacity: 0.05;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      .vignette {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        pointer-events: none;
+        background: radial-gradient(
+          120% 80% at 38% 32%,
+          transparent 56%,
+          rgba(0, 0, 0, 0.5)
+        );
+      }
+
+      .nav {
+        position: relative;
+        z-index: 7;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 48px;
+        max-width: 1140px;
+        margin: 0 auto;
+      }
+      .wm {
+        font-weight: 900;
+        font-size: 21px;
+        color: #fff;
+        letter-spacing: -0.03em;
+      }
+      .wm .ac {
+        color: var(--green-l);
+      }
+      .nav .menu {
+        display: flex;
+        gap: 22px;
+        margin-left: 30px;
+        font-size: 13px;
+        color: #9fb0a6;
+        font-weight: 500;
+      }
+      .nav .right {
+        margin-left: auto;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .tse {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 8px;
+        padding: 6px 11px;
+        font-family: var(--tech);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: #9fb0a6;
+      }
+      .tse .mk {
+        background: var(--green);
+        color: #03190c;
+        font-size: 10px;
+        padding: 2px 5px;
+        border-radius: 4px;
+      }
+      .svc {
+        background: #fff;
+        color: #07100b;
+        font-weight: 700;
+        font-size: 12px;
+        padding: 9px 15px;
+        border-radius: 30px;
+      }
+
+      .stage {
+        position: relative;
+        z-index: 5;
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 78px 48px 40px;
+      }
+      .eyebrow {
+        font-family: var(--tech);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--green-l);
+      }
+      h2.big {
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        line-height: 1.12;
+        color: #fff;
+        font-size: clamp(40px, 5.2vw, 64px);
+        margin-top: 18px;
+      }
+      .en {
+        display: block;
+        font-family: var(--tech);
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 15px;
+        margin-top: 18px;
+      }
+      .sub {
+        color: #9fb6aa;
+        font-size: 15px;
+        line-height: 1.95;
+        font-weight: 500;
+        margin-top: 20px;
+        max-width: 30em;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--green);
+        color: #03190c;
+        font-weight: 700;
+        font-size: 14px;
+        padding: 14px 28px;
+        border-radius: 34px;
+        margin-top: 30px;
+        box-shadow: 0 14px 34px -10px rgba(19, 176, 73, 0.6);
+        transition: transform 0.2s;
+      }
+      .cta:hover {
+        transform: translateY(-2px);
+      }
+
+      /* 右肩上がりの波＋文字が乗る */
+      .wavewrap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 64%;
+        z-index: 3;
+        pointer-events: none;
+      }
+      .wavewrap svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .wtext {
+        font-family: var(--tech);
+        font-weight: 600;
+        font-size: 23px;
+        letter-spacing: 0.06em;
+        fill: #dff7e8;
+      }
+      .wtext .g {
+        fill: var(--green-l);
+      }
+      .wtext .w {
+        fill: #ffffff;
+      }
+      .wline-main {
+        fill: none;
+        stroke: var(--green-l);
+        stroke-width: 2;
+        opacity: 0.55;
+      }
+      .wline-2 {
+        fill: none;
+        stroke: var(--green-d);
+        stroke-width: 2.5;
+        opacity: 0.5;
+        stroke-dasharray: 7 12;
+      }
+      .wline-3 {
+        fill: none;
+        stroke: var(--green-xl);
+        stroke-width: 1.5;
+        opacity: 0.4;
+        stroke-dasharray: 4 14;
+      }
+      .areafill {
+        opacity: 0.14;
+      }
+
+      .rv {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: rvin 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+      }
+      .rv.d1 {
+        animation-delay: 0.15s;
+      }
+      .rv.d2 {
+        animation-delay: 0.3s;
+      }
+      .rv.d3 {
+        animation-delay: 0.45s;
+      }
+      .rv.d4 {
+        animation-delay: 0.6s;
+      }
+      @keyframes rvin {
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+        }
+        .rv {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="head">
+      <h1>波B 進化版 ― 文字列が波に乗って流れる／右肩上がり</h1>
+      <p>
+        下部の波が右肩上がりに。データ文字列（東証グロース/¥1,235/+2.15%/PR…）が波の曲線に沿って流れます。クリックで選択を。
+      </p>
+    </div>
+
+    <div class="pick" data-choice="WaveB2" onclick="toggleSelect(this)">
+      <div class="hero">
+        <div class="aurora"><i class="g1"></i><i class="g2"></i></div>
+
+        <!-- 右肩上がりの波 + textPathで文字が乗る -->
+        <div class="wavewrap">
+          <svg viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice">
+            <defs>
+              <!-- 右肩上がりの波パス（左下→右上） -->
+              <path
+                id="riseMain"
+                d="M-120,300 C220,250 430,300 720,215 C1010,128 1240,178 1760,58"
+              />
+              <path
+                id="rise2"
+                d="M-120,335 C240,288 470,335 770,255 C1050,178 1300,215 1760,108"
+              />
+              <path
+                id="rise3"
+                d="M-120,265 C200,224 440,272 700,190 C1000,108 1250,150 1760,36"
+              />
+              <linearGradient id="af" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#2ed368" stop-opacity=".35" />
+                <stop offset="1" stop-color="#2ed368" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+
+            <!-- 塗り（メイン波の下） -->
+            <path
+              class="areafill"
+              d="M-120,300 C220,250 430,300 720,215 C1010,128 1240,178 1760,58 L1760,360 L-120,360 Z"
+              fill="url(#af)"
+            />
+
+            <!-- 装飾の波（流れる破線） -->
+            <use class="wline-3" href="#rise3">
+              <animate
+                attributeName="stroke-dashoffset"
+                from="0"
+                to="-200"
+                dur="6s"
+                repeatCount="indefinite"
+              />
+            </use>
+            <use class="wline-2" href="#rise2">
+              <animate
+                attributeName="stroke-dashoffset"
+                from="0"
+                to="-220"
+                dur="8s"
+                repeatCount="indefinite"
+              />
+            </use>
+            <use class="wline-main" href="#riseMain" />
+
+            <!-- 波頭を走る光点 -->
+            <circle r="6" fill="#eafff2">
+              <animateMotion
+                dur="9s"
+                repeatCount="indefinite"
+                keyPoints="0;1"
+                keyTimes="0;1"
+                calcMode="linear"
+              >
+                <mpath href="#riseMain" />
+              </animateMotion>
+            </circle>
+            <circle r="14" fill="#2ed368" opacity=".3">
+              <animateMotion dur="9s" repeatCount="indefinite">
+                <mpath href="#riseMain" />
+              </animateMotion>
+            </circle>
+
+            <!-- 文字が波に乗って流れる -->
+            <text class="wtext">
+              <textPath href="#riseMain" startOffset="0%">
+                東証グロース&#160;
+                <tspan class="w">198A</tspan>
+                &#160;&#160;・&#160;&#160;終値&#160;
+                <tspan class="w">¥1,235</tspan>
+                &#160;&#160;・&#160;&#160;前日比&#160;
+                <tspan class="g">+2.15%&#160;↑</tspan>
+                &#160;&#160;・&#160;&#160;
+                <tspan class="g">PR：株価意識高いよ。</tspan>
+                &#160;&#160;・&#160;&#160;SOCIAL&#160;&#160;・&#160;&#160;AI&#160;ANALYSIS&#160;&#160;・&#160;&#160;LIVE&#160;&#160;・&#160;&#160;
+                東証グロース&#160;
+                <tspan class="w">198A</tspan>
+                &#160;&#160;・&#160;&#160;終値&#160;
+                <tspan class="w">¥1,235</tspan>
+                &#160;&#160;・&#160;&#160;前日比&#160;
+                <tspan class="g">+2.15%&#160;↑</tspan>
+                &#160;&#160;・&#160;&#160;
+                <tspan class="g">PR：株価意識高いよ。</tspan>
+                &#160;&#160;・&#160;&#160;SOCIAL&#160;&#160;・&#160;&#160;AI&#160;ANALYSIS&#160;&#160;・&#160;&#160;LIVE&#160;&#160;・&#160;&#160;
+                <animate
+                  attributeName="startOffset"
+                  from="0%"
+                  to="-50%"
+                  dur="26s"
+                  repeatCount="indefinite"
+                />
+              </textPath>
+            </text>
+          </svg>
+        </div>
+
+        <div class="vignette"></div>
+        <div class="grain"></div>
+
+        <div class="nav">
+          <span class="wm rv">PostPrime<span class="ac">.</span></span>
+          <span class="menu rv d1"
+            ><span>会社概要</span><span>事業内容</span><span>IR</span
+            ><span>ニュース</span></span
+          >
+          <span class="right rv d1"
+            ><span class="tse"><span class="mk">TSE</span> GROWTH 198A</span
+            ><span class="svc">サービスサイト</span></span
+          >
+        </div>
+
+        <div class="stage">
+          <span class="eyebrow rv d1">PostPrime, Inc.</span>
+          <h2 class="big rv d2">お金のことを、<br />もっと自由に。</h2>
+          <span class="en rv d3">Grow Your Wealth, Be Free.</span>
+          <p class="sub rv d3">
+            投資SNS・ライブ・AI分析が集まる、お金の情報プラットフォーム。テクノロジーで、誰もが楽しく学べる社会へ。
+          </p>
+          <a class="cta rv d4">サービスを見る ↗</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

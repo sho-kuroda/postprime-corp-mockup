@@ -1,0 +1,1957 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PostPrime — Grow Your Wealth, Be Free.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Chakra+Petch:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --green: #13b049;
+        --green-d: #0a8f3c;
+        --green-l: #2ed368;
+        --green-xl: #8af2ad;
+        --green-dd: #06321a;
+        --blue: #2065e0;
+        --blue-d: #1450bd;
+        --blue-l: #5b9bff;
+        --blue-dd: #06152e;
+        --ink: #08110c;
+        --ink2: #566860;
+        --line: #e7ede9;
+        --bg: #f3f7f4;
+        --paper: #fbfdfb;
+        --mono: "Space Mono", monospace;
+        --tech: "Chakra Petch", sans-serif;
+        --jp:
+          "Zen Kaku Gothic New", -apple-system, "Hiragino Kaku Gothic ProN",
+          sans-serif;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--jp);
+        color: var(--ink);
+        background: var(--paper);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        opacity: 0.03;
+        mix-blend-mode: multiply;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      .wrap {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 48px;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .label {
+        font-family: var(--tech);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--green-d);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .label::before {
+        content: "";
+        width: 22px;
+        height: 2px;
+        background: var(--green);
+      }
+      .sec-h {
+        font-size: clamp(28px, 3.4vw, 38px);
+        font-weight: 900;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+        margin-top: 14px;
+      }
+
+      /* ===================== HERO ===================== */
+      .hero {
+        position: relative;
+        background: linear-gradient(
+          180deg,
+          #ffffff 0%,
+          var(--paper) 70%,
+          var(--bg)
+        );
+        overflow: hidden;
+        isolation: isolate;
+        min-height: 600px;
+      }
+      .glow {
+        position: absolute;
+        z-index: 0;
+        pointer-events: none;
+        filter: blur(84px);
+      }
+      .glow.a {
+        width: 520px;
+        height: 520px;
+        right: 0%;
+        top: -10%;
+        background: radial-gradient(
+          circle,
+          rgba(46, 211, 104, 0.16),
+          transparent 66%
+        );
+        animation: drift1 19s ease-in-out infinite;
+      }
+      @keyframes drift1 {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(-28px, 16px) scale(1.05);
+        }
+      }
+      .hgrid {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.38;
+        pointer-events: none;
+        background-image:
+          linear-gradient(var(--line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: radial-gradient(82% 82% at 62% 42%, #000, transparent 92%);
+      }
+      .fin {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 52px;
+        z-index: 2;
+        pointer-events: none;
+      }
+      .fin svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 48px;
+        max-width: 1140px;
+        margin: 0 auto;
+        width: 100%;
+        background: rgba(251, 253, 251, 0);
+      }
+      .hero nav {
+        position: relative;
+      }
+      .wm {
+        font-weight: 900;
+        font-size: 22px;
+        color: var(--ink);
+        letter-spacing: -0.03em;
+      }
+      .wm .ac {
+        color: var(--green);
+      }
+      nav .menu {
+        display: flex;
+        gap: 24px;
+        margin-left: 32px;
+        font-size: 14px;
+        color: var(--ink2);
+        font-weight: 500;
+      }
+      nav .menu a {
+        position: relative;
+        padding: 4px 0;
+      }
+      nav .menu a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 2px;
+        background: var(--green);
+        transition: width 0.25s;
+      }
+      nav .menu a:hover::after {
+        width: 100%;
+      }
+      nav .right {
+        margin-left: auto;
+        display: flex;
+        gap: 13px;
+        align-items: center;
+      }
+      .tse {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 6px 11px;
+        font-family: var(--tech);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--ink2);
+        background: rgba(255, 255, 255, 0.6);
+      }
+      .tse .mk {
+        background: var(--ink);
+        color: #fff;
+        font-size: 10px;
+        padding: 2px 5px;
+        border-radius: 4px;
+      }
+      .svc {
+        background: var(--green);
+        color: #fff;
+        font-weight: 700;
+        font-size: 12.5px;
+        padding: 9px 16px;
+        border-radius: 30px;
+        transition:
+          transform 0.2s,
+          background 0.2s;
+      }
+      .svc:hover {
+        background: var(--green-d);
+        transform: translateY(-1px);
+      }
+
+      .hstage {
+        position: relative;
+        z-index: 5;
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 38px 48px 96px;
+        width: 100%;
+      }
+      .heyebrow {
+        font-family: var(--tech);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        color: var(--green-d);
+      }
+      .hero h1 {
+        font-weight: 900;
+        letter-spacing: -0.025em;
+        line-height: 1.08;
+        color: var(--ink);
+        font-size: clamp(40px, 5.6vw, 66px);
+        margin-top: 18px;
+      }
+      .hero h1 .dot {
+        color: var(--green);
+      }
+      .hen {
+        display: block;
+        font-family: var(--tech);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: #8a9a91;
+        font-size: 15px;
+        margin-top: 16px;
+      }
+      .hsub {
+        color: var(--ink2);
+        font-size: 15.5px;
+        line-height: 1.95;
+        font-weight: 500;
+        margin-top: 18px;
+        max-width: 25em;
+      }
+      .hcta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--green);
+        color: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        padding: 15px 30px;
+        border-radius: 34px;
+        margin-top: 26px;
+        box-shadow: 0 16px 32px -12px rgba(19, 176, 73, 0.55);
+        transition: transform 0.2s;
+      }
+      .hcta:hover {
+        transform: translateY(-2px);
+      }
+      .hcta .arr {
+        transition: transform 0.25s;
+      }
+      .hcta:hover .arr {
+        transform: translate(4px, -4px);
+      }
+
+      /* 自動スクロール ティッカー（fonfun風・チャートに接地） */
+      .htkr {
+        position: relative;
+        z-index: 6;
+        border-top: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(8px);
+        overflow: hidden;
+      }
+      .htkr .row {
+        display: flex;
+        align-items: center;
+      }
+      .htkr .ld {
+        flex: none;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 0 18px;
+        height: 50px;
+        border-right: 1px solid var(--line);
+        background: #fff;
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--green-d);
+        z-index: 2;
+      }
+      .htkr .ld .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 0 0 rgba(19, 176, 73, 0.5);
+        animation: pl 1.8s infinite;
+      }
+      @keyframes pl {
+        0% {
+          box-shadow: 0 0 0 0 rgba(19, 176, 73, 0.5);
+        }
+        70% {
+          box-shadow: 0 0 0 7px rgba(19, 176, 73, 0);
+        }
+      }
+      .htkr .mask {
+        flex: 1;
+        overflow: hidden;
+      }
+      .htkr .track {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--ink2);
+        animation: tkr 34s linear infinite;
+      }
+      .htkr:hover .track {
+        animation-play-state: paused;
+      }
+      .htkr .it {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 22px;
+        height: 50px;
+      }
+      .htkr b {
+        color: var(--ink);
+      }
+      .htkr .up {
+        color: var(--green-d);
+        font-weight: 700;
+      }
+      .htkr .pr {
+        color: var(--green-d);
+        font-weight: 700;
+      }
+      .htkr .sep {
+        color: #cdd8d1;
+      }
+      @keyframes tkr {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      .cndl {
+        transform-box: fill-box;
+        transform-origin: bottom;
+        transform: scaleY(0);
+        animation: grow 0.55s cubic-bezier(0.3, 0.8, 0.3, 1) forwards;
+      }
+      @keyframes grow {
+        to {
+          transform: scaleY(1);
+        }
+      }
+      .tick {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: tickk 2.6s ease-in-out 2.6s infinite;
+      }
+      @keyframes tickk {
+        0%,
+        100% {
+          transform: scaleY(1);
+        }
+        50% {
+          transform: scaleY(1.06);
+        }
+      }
+      .ma {
+        stroke-dasharray: 3200;
+        stroke-dashoffset: 3200;
+        animation: draw 2.4s ease 1.4s forwards;
+      }
+      @keyframes draw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      .areaf {
+        opacity: 0;
+        animation: af 1.2s ease 1.5s forwards;
+      }
+      @keyframes af {
+        to {
+          opacity: 1;
+        }
+      }
+      .arrow {
+        opacity: 0;
+        animation: af 0.7s ease 2.7s forwards;
+      }
+      .pdot {
+        animation: pdot 2s ease-out 2.7s infinite;
+      }
+      @keyframes pdot {
+        0% {
+          r: 5;
+          opacity: 0.85;
+        }
+        70% {
+          r: 24;
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      .rv {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: rvin 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+      }
+      .rv.d1 {
+        animation-delay: 0.15s;
+      }
+      .rv.d2 {
+        animation-delay: 0.3s;
+      }
+      .rv.d3 {
+        animation-delay: 0.45s;
+      }
+      .rv.d4 {
+        animation-delay: 0.6s;
+      }
+      @keyframes rvin {
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* ===================== ABOUT ===================== */
+      .about {
+        padding: 104px 0;
+      }
+      .about .big {
+        font-size: clamp(24px, 3vw, 34px);
+        font-weight: 700;
+        line-height: 1.78;
+        margin-top: 22px;
+      }
+      .about .big .g {
+        color: var(--green-d);
+      }
+      .about .big .mk {
+        background: linear-gradient(
+          transparent 62%,
+          rgba(46, 211, 104, 0.28) 0
+        );
+      }
+      .about p.sub {
+        margin-top: 24px;
+        color: var(--ink2);
+        font-size: 15px;
+        line-height: 2;
+        max-width: 44em;
+        font-weight: 500;
+      }
+
+      /* ===================== SERVICES (B2) ===================== */
+      .services {
+        --b: var(--blue);
+        --bd: var(--blue-d);
+        --bl: var(--blue-l);
+        --bdd: var(--blue-dd);
+        background: var(--paper);
+        padding: 104px 0 0;
+        border-top: 1px solid var(--line);
+      }
+      .split {
+        position: relative;
+        min-height: 560px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 50px;
+      }
+      .half {
+        padding: 60px clamp(40px, 5.5vw, 86px);
+        position: relative;
+        overflow: hidden;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+      }
+      .half.pp {
+        background: radial-gradient(
+          120% 120% at 18% 16%,
+          #11592f,
+          var(--green-dd)
+        );
+        clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+        z-index: 2;
+      }
+      .half.tt {
+        background: radial-gradient(
+          120% 120% at 82% 16%,
+          #1a4090,
+          var(--blue-dd)
+        );
+        clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+        margin-left: -6%;
+      }
+      .half .bignum {
+        position: absolute;
+        font-family: var(--mono);
+        font-size: 190px;
+        font-weight: 700;
+        opacity: 0.07;
+        line-height: 0.8;
+      }
+      .half.pp .bignum {
+        right: 14%;
+        bottom: -16px;
+      }
+      .half.tt .bignum {
+        left: 5%;
+        bottom: -16px;
+      }
+      .half .inner {
+        position: relative;
+        z-index: 3;
+        max-width: 380px;
+      }
+      .half.tt .inner {
+        margin-left: auto;
+      }
+      .half .catrow {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+      }
+      .half .catico {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+      }
+      .half .catico img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .half .k {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        letter-spacing: 0.12em;
+      }
+      .half.pp .k {
+        color: var(--green-l);
+      }
+      .half.tt .k {
+        color: var(--blue-l);
+      }
+      .half .snm {
+        font-size: 38px;
+        font-weight: 900;
+        margin: 14px 0 6px;
+        letter-spacing: -0.02em;
+      }
+      .half .what {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.5;
+      }
+      .half .what em {
+        font-style: normal;
+      }
+      .half.pp .what em {
+        color: var(--green-l);
+      }
+      .half.tt .what em {
+        color: var(--blue-l);
+      }
+      .half .sdesc {
+        font-size: 13.5px;
+        line-height: 1.8;
+        margin-top: 12px;
+        font-weight: 500;
+      }
+      .half.pp .sdesc {
+        color: #a7d3ba;
+      }
+      .half.tt .sdesc {
+        color: #9fb6e4;
+      }
+      .half .prevcard {
+        margin-top: 22px;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 24px 50px -18px rgba(0, 0, 0, 0.5);
+      }
+      .pp-app {
+        background: #fff;
+        padding: 14px;
+      }
+      .pp-app .bar {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eef2f0;
+      }
+      .pp-app .bar .lg {
+        font-size: 13px;
+        font-weight: 900;
+        color: var(--ink);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .pp-app .bar .lg img {
+        width: 18px;
+        height: 18px;
+        border-radius: 5px;
+      }
+      .pp-app .bar .tag {
+        margin-left: auto;
+        font-size: 9px;
+        font-weight: 800;
+        color: #e0353f;
+        background: #ffe9e9;
+        padding: 2px 7px;
+        border-radius: 10px;
+      }
+      .pp-app .post {
+        display: flex;
+        gap: 10px;
+        padding: 11px 2px;
+      }
+      .pp-app .post .av {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: linear-gradient(140deg, var(--green-l), var(--green-d));
+        flex: none;
+      }
+      .pp-app .post .pt {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ink);
+        line-height: 1.4;
+      }
+      .pp-app .post .ps {
+        font-size: 10px;
+        color: #9aa6a0;
+        margin-top: 4px;
+      }
+      .pp-app .ai {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #f0fbf4;
+        border-radius: 10px;
+        padding: 9px 11px;
+        margin-top: 6px;
+      }
+      .pp-app .ai .v {
+        margin-left: auto;
+        font-family: var(--mono);
+        font-weight: 700;
+        color: var(--green-d);
+        font-size: 13px;
+      }
+      .pp-app .ai .t {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .tt-app {
+        background: #0a1834;
+        padding: 16px;
+      }
+      .tt-app .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      .tt-app .sym {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: #7fa0d8;
+      }
+      .tt-app .px {
+        font-size: 23px;
+        font-weight: 900;
+        color: #fff;
+      }
+      .tt-app .chg {
+        color: var(--blue-l);
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 12px;
+      }
+      .tt-app svg {
+        width: 100%;
+        height: 96px;
+        margin-top: 8px;
+        display: block;
+      }
+      .tt-app .tf {
+        display: flex;
+        gap: 6px;
+        margin-top: 8px;
+        align-items: center;
+      }
+      .tt-app .tf span {
+        font-family: var(--mono);
+        font-size: 9.5px;
+        color: #7fa0d8;
+        border: 1px solid #244380;
+        border-radius: 5px;
+        padding: 3px 7px;
+      }
+      .tt-app .tf span.on {
+        background: var(--blue);
+        color: #fff;
+        border-color: var(--blue);
+      }
+      .tt-app .tf .tv {
+        margin-left: auto;
+        opacity: 0.7;
+        border: none;
+      }
+      .half .schips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 16px;
+      }
+      .half .schips span {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        font-weight: 700;
+        padding: 5px 10px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+      }
+      .half .sgo {
+        margin-top: auto;
+        padding-top: 24px;
+      }
+      .half .sgo .b {
+        display: inline-flex;
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 13px;
+        font-weight: 700;
+        padding: 11px 22px;
+        border-radius: 28px;
+        transition: transform 0.2s;
+      }
+      .half.pp .sgo .b {
+        background: var(--green);
+        color: #03190c;
+      }
+      .half.tt .sgo .b {
+        background: #fff;
+        color: var(--blue-dd);
+      }
+      .half .sgo .b:hover {
+        transform: translateY(-2px);
+      }
+
+      /* ===================== FEATURES ===================== */
+      .features {
+        padding: 104px 0;
+      }
+      .feat-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 36px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .feat {
+        padding: 32px 26px;
+        border-right: 1px solid var(--line);
+        transition: background 0.3s;
+      }
+      .feat:last-child {
+        border-right: none;
+      }
+      .feat:hover {
+        background: var(--bg);
+      }
+      .feat .fi {
+        width: 44px;
+        height: 44px;
+        border-radius: 13px;
+        background: rgba(46, 211, 104, 0.13);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+      }
+      .feat .idx {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: #aebcb4;
+        font-weight: 700;
+        float: right;
+      }
+      .feat h4 {
+        font-size: 16.5px;
+        font-weight: 700;
+        margin: 18px 0 9px;
+      }
+      .feat p {
+        color: var(--ink2);
+        font-size: 13px;
+        line-height: 1.8;
+        font-weight: 500;
+      }
+
+      /* ===================== MISSION & VALUE ===================== */
+      .mv {
+        position: relative;
+        color: #fff;
+        padding: 108px 0;
+        overflow: hidden;
+        background: radial-gradient(
+          120% 120% at 88% -10%,
+          #10502c,
+          var(--green-dd) 58%,
+          #03190f
+        );
+      }
+      .mv::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.06;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      .mv .wrap {
+        position: relative;
+        z-index: 2;
+      }
+      .mv .label {
+        color: var(--green-l);
+      }
+      .mv .label::before {
+        background: var(--green-l);
+      }
+      .mv .mission {
+        font-size: clamp(26px, 3.2vw, 38px);
+        font-weight: 900;
+        line-height: 1.55;
+        margin-top: 18px;
+        max-width: 18em;
+        letter-spacing: -0.01em;
+      }
+      .mv .mission .g {
+        color: var(--green-l);
+      }
+      .mv .vals {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        margin-top: 52px;
+      }
+      .mv .val {
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        border-radius: 18px;
+        padding: 26px;
+        transition:
+          background 0.3s,
+          transform 0.3s;
+      }
+      .mv .val:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-4px);
+      }
+      .mv .val .no {
+        font-family: var(--mono);
+        color: var(--green-l);
+        font-weight: 700;
+        font-size: 22px;
+      }
+      .mv .val h4 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 12px 0 8px;
+      }
+      .mv .val p {
+        color: #9fbfae;
+        font-size: 13px;
+        line-height: 1.75;
+        font-weight: 500;
+      }
+
+      /* ===================== COMPANY ===================== */
+      .company {
+        padding: 104px 0;
+      }
+      .co-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.05fr;
+        gap: 56px;
+        margin-top: 36px;
+        align-items: start;
+      }
+      .co-facts {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .co-facts tr {
+        transition: background 0.2s;
+      }
+      .co-facts tr:hover {
+        background: var(--bg);
+      }
+      .co-facts th,
+      .co-facts td {
+        text-align: left;
+        padding: 16px 8px;
+        border-bottom: 1px solid var(--line);
+        font-size: 14.5px;
+        vertical-align: top;
+      }
+      .co-facts th {
+        width: 32%;
+        color: var(--ink2);
+        font-weight: 500;
+        font-family: var(--mono);
+        font-size: 12px;
+      }
+      .co-facts td {
+        font-weight: 700;
+      }
+      .co-facts td .pill {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        background: rgba(46, 211, 104, 0.14);
+        color: var(--green-d);
+        padding: 3px 9px;
+        border-radius: 20px;
+        margin-left: 8px;
+      }
+      .hist {
+        border-left: 2px solid var(--line);
+        padding-left: 28px;
+      }
+      .hist .h-item {
+        position: relative;
+        padding: 0 0 24px;
+      }
+      .hist .h-item:last-child {
+        padding-bottom: 0;
+      }
+      .hist .h-item::before {
+        content: "";
+        position: absolute;
+        left: -35px;
+        top: 4px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow:
+          0 0 0 4px var(--paper),
+          0 0 0 6px rgba(46, 211, 104, 0.25);
+      }
+      .hist .y {
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--green-d);
+      }
+      .hist .t {
+        font-size: 14.5px;
+        color: var(--ink);
+        margin-top: 4px;
+        font-weight: 500;
+      }
+
+      /* ===================== NEWS / IR ===================== */
+      .info {
+        background: var(--bg);
+        border-top: 1px solid var(--line);
+      }
+      .info .cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+      }
+      .info h3 {
+        font-size: 24px;
+        font-weight: 900;
+        display: flex;
+        align-items: baseline;
+        gap: 13px;
+      }
+      .info h3 .en2 {
+        font-family: var(--mono);
+        color: #aebcb4;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+      }
+      .info ul {
+        list-style: none;
+        margin-top: 22px;
+      }
+      .info li {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 17px 6px;
+        border-bottom: 1px solid #dde5e0;
+        font-size: 14px;
+        transition:
+          background 0.2s,
+          padding-left 0.2s;
+        cursor: pointer;
+      }
+      .info li:hover {
+        background: var(--paper);
+        padding-left: 14px;
+      }
+      .info li .date {
+        font-family: var(--mono);
+        color: var(--ink2);
+        font-weight: 700;
+        font-size: 12.5px;
+        flex: none;
+      }
+      .info li .pill {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        font-weight: 700;
+        padding: 3px 9px;
+        border-radius: 6px;
+        flex: none;
+      }
+      .info li .pill.news {
+        background: rgba(46, 211, 104, 0.16);
+        color: var(--green-d);
+      }
+      .info li .pill.ir {
+        background: var(--ink);
+        color: #fff;
+      }
+      .info li .ttl {
+        font-weight: 500;
+      }
+      .info .more {
+        margin-top: 22px;
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--green-d);
+        display: inline-flex;
+        gap: 8px;
+      }
+
+      /* ===================== IR LIBRARY ===================== */
+      .irq {
+        padding: 104px 0;
+      }
+      .irq-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 36px;
+      }
+      .irq-card {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px 24px;
+        transition: 0.25s;
+      }
+      .irq-card:hover {
+        border-color: rgba(19, 176, 73, 0.5);
+        background: var(--bg);
+        transform: translateY(-3px);
+      }
+      .irq-card .qi {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: var(--ink);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex: none;
+        transition: background 0.25s;
+      }
+      .irq-card:hover .qi {
+        background: var(--green-d);
+      }
+      .irq-card .qt {
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .irq-card .qs {
+        font-size: 12px;
+        color: var(--ink2);
+        margin-top: 2px;
+        font-weight: 500;
+      }
+      .irq-card .arr {
+        margin-left: auto;
+        color: var(--green-d);
+        font-weight: 700;
+        font-family: var(--mono);
+        transition: transform 0.25s;
+      }
+      .irq-card:hover .arr {
+        transform: translateX(5px);
+      }
+
+      /* ===================== FOOTER ===================== */
+      footer {
+        background: var(--ink);
+        color: #aeb9b2;
+      }
+      footer .wrap {
+        padding: 72px 48px 36px;
+      }
+      .ftop {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .ftop .wm {
+        color: #fff;
+        font-size: 26px;
+      }
+      .ftop p {
+        font-size: 13px;
+        line-height: 1.9;
+        margin-top: 14px;
+        max-width: 24em;
+        color: #7d918a;
+        font-weight: 500;
+      }
+      .fcols {
+        margin-left: auto;
+        display: flex;
+        gap: 50px;
+        font-size: 13px;
+      }
+      .fcols h5 {
+        font-family: var(--mono);
+        color: #fff;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+      .fcols a {
+        display: block;
+        color: #9aa8a1;
+        margin-bottom: 11px;
+        transition:
+          color 0.2s,
+          transform 0.2s;
+      }
+      .fcols a:hover {
+        color: var(--green-l);
+        transform: translateX(3px);
+      }
+      .ribbon {
+        margin-top: 48px;
+        padding-top: 26px;
+        border-top: 1px solid #1c2620;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-size: 12.5px;
+        flex-wrap: wrap;
+      }
+      .tse-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .tse-logo .sq {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: #fff;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .isms {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #1c2620;
+        border-radius: 9px;
+        padding: 7px 13px;
+        font-family: var(--mono);
+        font-size: 10.5px;
+        color: #7d918a;
+        font-weight: 700;
+      }
+      .ribbon .small {
+        margin-left: auto;
+        opacity: 0.45;
+        font-size: 11px;
+        font-weight: 500;
+      }
+      .copy {
+        margin-top: 20px;
+        font-family: var(--mono);
+        font-size: 11px;
+        opacity: 0.4;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition:
+          opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+        }
+        .reveal,
+        .rv {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        .cndl {
+          transform: scaleY(1);
+        }
+        .ma {
+          stroke-dashoffset: 0;
+        }
+      }
+      @media (max-width: 880px) {
+        .split {
+          grid-template-columns: 1fr;
+        }
+        .half.pp,
+        .half.tt {
+          clip-path: none;
+          margin: 0;
+        }
+        .feat-grid,
+        .mv .vals,
+        .irq-grid,
+        .co-grid,
+        .info .cols {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===================== HERO ===================== -->
+    <div class="hero">
+      <div class="glow a"></div>
+      <div class="hgrid"></div>
+      <div class="fin" id="fin"></div>
+
+      <nav>
+        <span class="wm rv">PostPrime<span class="ac">.</span></span>
+        <span class="menu rv d1"
+          ><a>会社概要</a><a>事業内容</a><a>経営陣</a><a>IR</a><a>ニュース</a
+          ><a>お問い合わせ</a></span
+        >
+        <span class="right rv d1"
+          ><span class="tse"><span class="mk">TSE</span> GROWTH 198A</span
+          ><span class="svc">サービスサイト</span></span
+        >
+      </nav>
+
+      <div class="hstage">
+        <span class="heyebrow rv d1">PostPrime, Inc.</span>
+        <h1 class="rv d2">
+          お金のことを、<br />もっと自由に<span class="dot">。</span>
+        </h1>
+        <span class="hen rv d3">Grow Your Wealth, Be Free.</span>
+        <p class="hsub rv d3">
+          投資SNS・ライブ・AI分析が集まる、お金の情報プラットフォーム。テクノロジーで、誰もが楽しく学べる社会へ。
+        </p>
+        <a class="hcta rv d4">サービスを見る <span class="arr">↗</span></a>
+      </div>
+
+      <div class="htkr rv d4">
+        <div class="row">
+          <span class="ld"><span class="dot"></span>LIVE</span>
+          <span class="mask">
+            <span class="track">
+              <span class="it">東証グロース <b>198A</b></span
+              ><span class="sep">/</span>
+              <span class="it">終値 <b>¥1,235</b></span
+              ><span class="sep">/</span>
+              <span class="it"><span class="up">前日比 +2.15% ↑</span></span
+              ><span class="sep">/</span>
+              <span class="it">高値 <b>1,250</b> 安値 <b>1,180</b></span
+              ><span class="sep">/</span>
+              <span class="it">売買単位 <b>100株</b></span
+              ><span class="sep">/</span>
+              <span class="it"
+                ><span class="pr">PR：株価意識高いよ。</span></span
+              ><span class="sep">/</span>
+              <span class="it">2026.05.28 15:30 更新</span
+              ><span class="sep">/</span>
+              <span class="it">東証グロース <b>198A</b></span
+              ><span class="sep">/</span>
+              <span class="it">終値 <b>¥1,235</b></span
+              ><span class="sep">/</span>
+              <span class="it"><span class="up">前日比 +2.15% ↑</span></span
+              ><span class="sep">/</span>
+              <span class="it">高値 <b>1,250</b> 安値 <b>1,180</b></span
+              ><span class="sep">/</span>
+              <span class="it">売買単位 <b>100株</b></span
+              ><span class="sep">/</span>
+              <span class="it"
+                ><span class="pr">PR：株価意識高いよ。</span></span
+              ><span class="sep">/</span>
+              <span class="it">2026.05.28 15:30 更新</span
+              ><span class="sep">/</span>
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="about">
+      <div class="wrap reveal">
+        <div class="label">About</div>
+        <div class="big">
+          「お金」に関する情報が集まる<span class="g">プラットフォーム</span
+          >を運営し、<br />誰もが<span class="mk">楽しく学べる社会</span
+          >を、テクノロジーでつくる。
+        </div>
+        <p class="sub">
+          ライブ配信・動画・音声・投稿を通じて、専門家から投資のことを学べるコミュニティ「PostPrime」。さらにAIがチャートパターンとテクニカル分析を学習し、相場理解を後押しします。Grow
+          Your Wealth, Be Free ――
+          資産を育て、自由になる。その体験を、すべての人へ。
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== SERVICES (B2) ===================== -->
+    <section class="services">
+      <div class="wrap reveal">
+        <div class="label">Business</div>
+        <h2 class="sec-h">事業・サービス</h2>
+      </div>
+      <div class="split reveal">
+        <div class="half pp">
+          <div class="bignum">01</div>
+          <div class="inner">
+            <div class="catrow">
+              <div class="catico"><img id="ppico" alt="PostPrime" /></div>
+              <div class="k">SERVICE / 金融コミュニティ</div>
+            </div>
+            <div class="snm">PostPrime</div>
+            <div class="what"><em>投資が学べる、金融SNS。</em></div>
+            <div class="sdesc">
+              ライブ・動画・投稿で専門家から投資を学べるコミュニティ。AIが市場分析を後押し。
+            </div>
+            <div class="prevcard pp-app">
+              <div class="bar">
+                <span class="lg"
+                  ><img id="ppico2" />PostPrime<span style="color: var(--green)"
+                    >.</span
+                  ></span
+                ><span class="tag">● LIVE</span>
+              </div>
+              <div class="post">
+                <div class="av"></div>
+                <div>
+                  <div class="pt">今夜の相場をライブ解説 🎥</div>
+                  <div class="ps">投資クリエイター ・ 視聴 1,204</div>
+                </div>
+              </div>
+              <div class="ai">
+                <span class="t">🤖 AI Market Scan</span
+                ><span class="v">+2.15%</span>
+              </div>
+            </div>
+            <div class="schips">
+              <span>投資SNS</span><span>ライブ配信</span><span>AI分析</span>
+            </div>
+            <div class="sgo"><span class="b">postprime.com ↗</span></div>
+          </div>
+        </div>
+        <div class="half tt">
+          <div class="bignum">02</div>
+          <div class="inner">
+            <div class="catrow">
+              <div class="catico"><img id="ttico" alt="TakaTrade" /></div>
+              <div class="k">SERVICE / 商品CFD取引</div>
+            </div>
+            <div class="snm">TakaTrade</div>
+            <div class="what"><em>商品CFDの取引アプリ。</em></div>
+            <div class="sdesc">
+              金・原油など19銘柄を、最大20倍のレバレッジで。最短5分で口座開設、各種手数料0円。
+            </div>
+            <div class="prevcard tt-app">
+              <div class="top">
+                <div>
+                  <div class="sym">GOLD / CFD</div>
+                  <div class="px">3,418.5</div>
+                </div>
+                <div class="chg">+1.24% ↑</div>
+              </div>
+              <svg viewBox="0 0 300 96" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="ttbg" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#5b9bff" stop-opacity=".45" />
+                    <stop offset="1" stop-color="#5b9bff" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M0,74 L38,64 L76,70 L114,48 L152,54 L190,34 L228,40 L300,16 L300,96 L0,96 Z"
+                  fill="url(#ttbg)"
+                />
+                <path
+                  d="M0,74 L38,64 L76,70 L114,48 L152,54 L190,34 L228,40 L300,16"
+                  fill="none"
+                  stroke="#5b9bff"
+                  stroke-width="2"
+                />
+              </svg>
+              <div class="tf">
+                <span class="on">1H</span><span>4H</span><span>1D</span
+                ><span class="tv">TradingView</span>
+              </div>
+            </div>
+            <div class="schips">
+              <span>19銘柄</span><span>レバレッジ20倍</span
+              ><span>手数料0円</span>
+            </div>
+            <div class="sgo"><span class="b">takatrade.com ↗</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FEATURES ===================== -->
+    <section class="features">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="label">Features</div>
+          <h2 class="sec-h">PostPrimeでできること</h2>
+        </div>
+        <div class="feat-grid reveal">
+          <div class="feat">
+            <span class="idx">01</span>
+            <div class="fi">🎥</div>
+            <h4>ライブ配信・動画</h4>
+            <p>専門家のライブ・動画・音声投稿で、投資を楽しく学べる。</p>
+          </div>
+          <div class="feat">
+            <span class="idx">02</span>
+            <div class="fi">🤖</div>
+            <h4>AI分析</h4>
+            <p>AIが市場やニュースを分析し、相場理解を後押し。</p>
+          </div>
+          <div class="feat">
+            <span class="idx">03</span>
+            <div class="fi">📊</div>
+            <h4>テクニカル分析学習</h4>
+            <p>チャートパターンを学習したAIが分析を提供。</p>
+          </div>
+          <div class="feat">
+            <span class="idx">04</span>
+            <div class="fi">🧭</div>
+            <h4>マーケット評価分析</h4>
+            <p>マーケットの評価・分析機能で投資判断を支援。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MISSION & VALUE ===================== -->
+    <section class="mv">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="label">Mission &amp; Value</div>
+          <div class="mission">
+            最新テクノロジーを使って、誰でもお金のことを<span class="g"
+              >楽しく学べる</span
+            >プラットフォームへ。
+          </div>
+        </div>
+        <div class="vals">
+          <div class="val reveal">
+            <div class="no">01</div>
+            <h4>コミュニケーション</h4>
+            <p>アイデアを発想し共有する。</p>
+          </div>
+          <div class="val reveal" style="transition-delay: 0.08s">
+            <div class="no">02</div>
+            <h4>創造性</h4>
+            <p>創造的な考えを尊重する。</p>
+          </div>
+          <div class="val reveal" style="transition-delay: 0.16s">
+            <div class="no">03</div>
+            <h4>チームワーク</h4>
+            <p>相互にサポートし合う。</p>
+          </div>
+          <div class="val reveal" style="transition-delay: 0.24s">
+            <div class="no">04</div>
+            <h4>責任感</h4>
+            <p>当事者意識を強く持つ。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COMPANY ===================== -->
+    <section class="company">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="label">Company</div>
+          <h2 class="sec-h">会社概要</h2>
+        </div>
+        <div class="co-grid">
+          <table class="co-facts reveal">
+            <tr>
+              <th>会社名</th>
+              <td>PostPrime株式会社</td>
+            </tr>
+            <tr>
+              <th>代表取締役</th>
+              <td>松島 悟</td>
+            </tr>
+            <tr>
+              <th>設立</th>
+              <td>2020年9月18日</td>
+            </tr>
+            <tr>
+              <th>所在地</th>
+              <td>〒105-0001 東京都港区虎ノ門 1-10-5</td>
+            </tr>
+            <tr>
+              <th>事業内容</th>
+              <td>PostPrime の運営</td>
+            </tr>
+            <tr>
+              <th>上場市場</th>
+              <td>
+                東京証券取引所 グロース市場<span class="pill">CODE 198A</span>
+              </td>
+            </tr>
+            <tr>
+              <th>認証</th>
+              <td>ISMS ISO/IEC 27001:2022（GIJP-0975-IC）</td>
+            </tr>
+          </table>
+          <div class="reveal" style="transition-delay: 0.1s">
+            <div
+              style="
+                font-family: var(--mono);
+                font-weight: 700;
+                font-size: 12px;
+                letter-spacing: 0.14em;
+                color: var(--ink2);
+                margin-bottom: 22px;
+              "
+            >
+              HISTORY
+            </div>
+            <div class="hist">
+              <div class="h-item">
+                <div class="y">2020.09</div>
+                <div class="t">DKT株式会社として設立</div>
+              </div>
+              <div class="h-item">
+                <div class="y">2021.09</div>
+                <div class="t">「PostPrime」をリリース</div>
+              </div>
+              <div class="h-item">
+                <div class="y">2022.04</div>
+                <div class="t">商号を PostPrime株式会社に変更／渋谷へ移転</div>
+              </div>
+              <div class="h-item">
+                <div class="y">2023.01</div>
+                <div class="t">虎ノ門へ移転</div>
+              </div>
+              <div class="h-item">
+                <div class="y">2024.10</div>
+                <div class="t">
+                  PostPrime Trading株式会社（旧TakaTrade）設立
+                </div>
+              </div>
+              <div class="h-item">
+                <div class="y">2025.08</div>
+                <div class="t">「TakaTrade」サービスリリース</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== NEWS / IR ===================== -->
+    <div class="info">
+      <section class="wrap reveal" style="padding: 80px 0">
+        <div class="cols">
+          <div>
+            <h3>お知らせ <span class="en2">NEWS</span></h3>
+            <ul>
+              <li>
+                <span class="date">2026.05.12</span
+                ><span class="pill news">お知らせ</span
+                ><span class="ttl">「株価意識高いよ。」PR公開のお知らせ</span>
+              </li>
+              <li>
+                <span class="date">2026.04.28</span
+                ><span class="pill news">プレス</span
+                ><span class="ttl">新機能「AI Market Scan」をリリース</span>
+              </li>
+              <li>
+                <span class="date">2026.04.10</span
+                ><span class="pill news">お知らせ</span
+                ><span class="ttl">オフィス移転に関するお知らせ</span>
+              </li>
+            </ul>
+            <div class="more">お知らせ一覧 →</div>
+          </div>
+          <div>
+            <h3>IR情報 <span class="en2">IR</span></h3>
+            <ul>
+              <li>
+                <span class="date">2025.08.14</span
+                ><span class="pill ir">IR</span
+                ><span class="ttl">2025年5月期 決算説明資料を掲載しました</span>
+              </li>
+              <li>
+                <span class="date">2025.08.14</span
+                ><span class="pill ir">適時開示</span
+                ><span class="ttl">2025年5月期 通期決算短信</span>
+              </li>
+              <li>
+                <span class="date">2025.07.31</span
+                ><span class="pill ir">IR</span
+                ><span class="ttl">配当予想に関するお知らせ</span>
+              </li>
+            </ul>
+            <div class="more">IR情報一覧 →</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===================== IR LIBRARY ===================== -->
+    <section class="irq">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="label">IR Library</div>
+          <h2 class="sec-h">投資家情報</h2>
+        </div>
+        <div class="irq-grid reveal">
+          <a class="irq-card"
+            ><span class="qi">📄</span
+            ><span
+              ><span class="qt">決算短信</span
+              ><span class="qs">四半期・通期</span></span
+            ><span class="arr">→</span></a
+          >
+          <a class="irq-card"
+            ><span class="qi">📚</span
+            ><span
+              ><span class="qt">有価証券報告書</span
+              ><span class="qs">法定開示書類</span></span
+            ><span class="arr">→</span></a
+          >
+          <a class="irq-card"
+            ><span class="qi">📊</span
+            ><span
+              ><span class="qt">決算説明資料</span
+              ><span class="qs">説明会資料</span></span
+            ><span class="arr">→</span></a
+          >
+          <a class="irq-card"
+            ><span class="qi">📈</span
+            ><span
+              ><span class="qt">株式情報</span
+              ><span class="qs">株価・株式の状況</span></span
+            ><span class="arr">→</span></a
+          >
+          <a class="irq-card"
+            ><span class="qi">🗓️</span
+            ><span
+              ><span class="qt">IRカレンダー</span
+              ><span class="qs">決算・IRイベント</span></span
+            ><span class="arr">→</span></a
+          >
+          <a class="irq-card"
+            ><span class="qi">🏛️</span
+            ><span
+              ><span class="qt">コーポレート・ガバナンス</span
+              ><span class="qs">経営体制・方針</span></span
+            ><span class="arr">→</span></a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+      <div class="wrap">
+        <div class="ftop">
+          <div>
+            <span class="wm">PostPrime<span class="ac">.</span></span>
+            <p>
+              お金に関する情報が集まるプラットフォーム。誰もが楽しく学べる未来を、テクノロジーでつくります。
+            </p>
+          </div>
+          <div class="fcols">
+            <div>
+              <h5>COMPANY</h5>
+              <a>会社概要</a><a>事業内容</a><a>経営陣</a><a>採用情報</a>
+            </div>
+            <div>
+              <h5>IR</h5>
+              <a>IRニュース</a><a>株式情報</a><a>適時開示</a
+              ><a>IRライブラリー</a><a>ガバナンス</a>
+            </div>
+            <div>
+              <h5>SUPPORT</h5>
+              <a>お知らせ</a><a>お問い合わせ</a><a>利用規約</a
+              ><a>プライバシー</a><a>セキュリティ方針</a>
+            </div>
+          </div>
+        </div>
+        <div class="ribbon">
+          <span class="tse-logo"
+            ><span class="sq">JPX</span> 東京証券取引所 グロース市場
+            上場（証券コード：198A）</span
+          >
+          <span class="isms">🔒 ISMS ISO/IEC 27001:2022</span>
+          <span class="small"
+            >※ JPX/東証ロゴは公式ガイドラインに沿った正式版へ差し替え予定</span
+          >
+        </div>
+        <div class="copy">© 2026 PostPrime, Inc.</div>
+      </div>
+    </footer>
+
+    <script>
+      // 白抜きロゴ（base64）を挿入
+      const PPW = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAC+0lEQVR4nO2cy67DIAxEcdT//+W5qytVVR8B/Bgbz6aLxiH1wcZQiAAYrThdgW23GkC8OgKC1QCC1QCC1QCC1QCC1QCC1QCC1QCC1QCC9Ri1hJvXySBRdgBQtnMHkwkAAtowB5IBAMjalpMGYYziYo4ADC6ZpCPWCMDgfCacFAGsUq2gWCPgGHUEBI8NDSB4UGYDgMEn08nYVbnCUBIqAwCx45+FigAwcgmVAEAxP8tIDOEqknJk+AnZAPw7HU49WUYiCA+Sh4RSmzT/dEVGgGdlgw/OTxMFV+GSUkYCaQFAsJPxpTNYggADgOhejzfP8ex0MEdD9ExYQ6/OfqcVCJIFgPdk6Jc+pZ5ZCL+u/5T+XAHcqfGtJF+++zXn0IBAVwVlEBZtxCr6MwPAy+es42bbEtYqKKtk8nqTamp3KUIWe4FJb3JwJipXQZJkCSH91kRx/IFwiILQMnRWd3+wEDyD9T3Ml6PFeHwRgmWQbVlGgMYkTYa+YHjA46gyFEr3CV1G0QTg+UPE2c7sXtoRIEZjAXPup9sbal3BIMD22z1L7Q01XfplVKZBGBu2bGkrHQBUHcwfBzheWHs/ewTAyfmhcK6DnS8b9y0NANXTDjMAODl/tayVygCwaX/XqRSph60Kwobtam8Gw+yeBYCX42dtjnhdDZwG2VmbNFsTvSUbG6xm2hgnAABhL3b9g+Yq7nwstOGqLMdUxbjK+W9jnADA0jFi8F3pMUAbWorlh+iD2toSpWvKA9DaxPuq3aWHMttSrISszq0CoLSuwrlfFmzc1REQLHYAKNJGWgAWaYMqDWUA8Els296pAeyUi1i0nbHD6RGAzbUaqv95WQGI8WsBRNHuuAjYeaHGr6Ou1BAYT0li8szwOwc/24enmWznhIfi266onR+Zgu5CwM1oYHtfXYoxQBaiQYjeN6EiAaieGT++v+t0+tTDCuBZnx5splSlB8EMYFWpQLDNAzS0OhcIEcPeUCvR9vrqEZBKDSBYDSBYDSBYDWDE6g8mGa3eoYo7gQAAAABJRU5ErkJggg==";
+      const TTW = "data:image/png;base64,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";
+      ["ppico", "ppico2"].forEach((id) => {
+        const e = document.getElementById(id);
+        if (e) e.src = PPW;
+      });
+      {
+        const e = document.getElementById("ttico");
+        if (e) e.src = TTW;
+      }
+
+      // ===== ヒーローのローソク足チャート（S字・なだらか上昇・テキスト回避） =====
+      (function () {
+        const VBW = 1200,
+          VBH = 506,
+          BASE = 506,
+          N = 30,
+          x0 = 70,
+          x1 = 1184,
+          W = 8;
+        const yLow = 474,
+          yHigh = 120;
+        const ss = (a, b, p) => {
+          const t = Math.max(0, Math.min(1, (p - a) / (b - a)));
+          return t * t * (3 - 2 * t);
+        };
+        const trendY = (i) => {
+          const p = i / (N - 1);
+          return yLow - ss(0.34, 0.98, p) * (yLow - yHigh);
+        };
+        const oscAmt = (i) => {
+          const p = i / (N - 1);
+          return 0.35 + 0.65 * ss(0.3, 0.9, p);
+        };
+        const osc = (i) =>
+          (Math.sin(i * 0.7) * 7 + Math.sin(i * 0.32 + 0.6) * 4.5) * oscAmt(i);
+        const cy = (i) => trendY(i) + osc(i);
+        let prevClose = cy(0) + 5,
+          candles = "",
+          mids = [];
+        for (let i = 0; i < N; i++) {
+          const x = x0 + ((x1 - x0) * i) / (N - 1);
+          const closeY = cy(i),
+            openY = prevClose;
+          const up = closeY <= openY;
+          let bt = Math.min(openY, closeY),
+            bb = Math.max(openY, closeY);
+          const minH = 6 + 8 * oscAmt(i);
+          if (bb - bt < minH) {
+            const m = (bt + bb) / 2;
+            bt = m - minH / 2;
+            bb = m + minH / 2;
+          }
+          const wl = 4 + 4 * oscAmt(i);
+          const wt = bt - wl,
+            wb = bb + wl;
+          prevClose = closeY;
+          mids.push([x, closeY]);
+          const last = i === N - 1;
+          const wc = up ? "#0a8f3c" : "#86b4a0";
+          const wick = `<line x1="${x.toFixed(1)}" y1="${wt.toFixed(1)}" x2="${x.toFixed(1)}" y2="${wb.toFixed(1)}" stroke="${wc}" stroke-width="2"/>`;
+          const body = up
+            ? `<rect x="${(x - W).toFixed(1)}" y="${bt.toFixed(1)}" width="${W * 2}" height="${(bb - bt).toFixed(1)}" rx="2.5" fill="url(#upg)"/>`
+            : `<rect x="${(x - W).toFixed(1)}" y="${bt.toFixed(1)}" width="${W * 2}" height="${(bb - bt).toFixed(1)}" rx="2.5" fill="#d6ece0"/>`;
+          const inner = wick + body;
+          candles += last
+            ? `<g class="cndl" style="animation-delay:${(0.4 + i * 0.04).toFixed(2)}s"><g class="tick">${inner}</g></g>`
+            : `<g class="cndl" style="animation-delay:${(0.4 + i * 0.04).toFixed(2)}s">${inner}</g>`;
+        }
+        let d = "M" + mids[0][0].toFixed(1) + "," + mids[0][1].toFixed(1);
+        for (let i = 1; i < mids.length; i++) {
+          const [x, y] = mids[i];
+          const [px, py] = mids[i - 1];
+          const cx = ((px + x) / 2).toFixed(1);
+          d += ` Q${px.toFixed(1)},${py.toFixed(1)} ${cx},${((py + y) / 2).toFixed(1)}`;
+        }
+        const area =
+          `M${x0},${BASE} L${mids[0][0].toFixed(1)},${mids[0][1].toFixed(1)}` +
+          d.slice(
+            ("M" + mids[0][0].toFixed(1) + "," + mids[0][1].toFixed(1)).length,
+          ) +
+          ` L${x1},${BASE} Z`;
+        const lx = mids[N - 1][0],
+          ly = mids[N - 1][1];
+        document.getElementById("fin").innerHTML = `
+    <svg viewBox="0 0 ${VBW} ${VBH}" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="upg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34db73"/><stop offset="1" stop-color="#0c9740"/></linearGradient>
+        <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2ed368" stop-opacity=".18"/><stop offset="1" stop-color="#2ed368" stop-opacity=".02"/></linearGradient>
+      </defs>
+      <path class="areaf" d="${area}" fill="url(#ag)"/>
+      <path class="ma" d="${d}" fill="none" stroke="#1aa84a" stroke-width="2" stroke-linecap="round" opacity=".55" vector-effect="non-scaling-stroke"/>
+      <g>${candles}</g>
+      <g class="arrow"><circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="5" fill="#13b049"/><circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="5" fill="none" stroke="#13b049" stroke-width="2" class="pdot"/></g>
+    </svg>`;
+      })();
+
+      // ===== スクロールリビール =====
+      const io = new IntersectionObserver(
+        (es) => {
+          es.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+      window.addEventListener("load", () =>
+        document
+          .querySelectorAll(".hero .rv")
+          .forEach((el) => el.classList.add("in")),
+      );
+    </script>
+  </body>
+</html>
